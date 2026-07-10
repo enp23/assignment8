@@ -76,7 +76,7 @@ jobs:
          push: true
          tags: |
            en23/assignment8:latest
-           enp23/assignment8:${{ github.sha }}
+           en23/assignment8:${{ github.sha }}
          platforms: linux/amd64,linux/arm64
          cache-from: type=registry,ref=en23/assignment8:cache
          cache-to: type=inline,mode=max
