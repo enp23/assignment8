@@ -2,7 +2,7 @@
 
 import pytest  # Import the pytest framework for writing and running tests
 from typing import Union  # Import Union for type hinting multiple possible types
-from app.operations import add, subtract, multiply, divide  # Import the calculator functions from the operations module
+from app.operations import add, subtract, multiply, divide, power # Import the calculator functions from the operations module
 
 # Define a type alias for numbers that can be either int or float
 Number = Union[int, float]
@@ -232,3 +232,36 @@ def test_divide_by_zero() -> None:
     # Assert that the exception message contains the expected error message
     assert "Cannot divide by zero!" in str(excinfo.value), \
         f"Expected error message 'Cannot divide by zero!', but got '{excinfo.value}'"
+
+#----------------------------------------------
+# Unit Tests for the 'power' Function
+#---------------------------------------------- 
+def test_power() -> None:
+    """
+    Test the 'power' function with various combinations of integers and floats.
+
+    This test verifies that the 'power' function correctly raises the first number to the power of the second,
+    handling both positive and negative values, as well as integers and floats.
+
+    Steps:
+    1. Call the 'power' function with various combinations of base and exponent.
+    2. Assert that the result is equal to the expected value.
+
+    Example:
+    >>> test_power()
+    """
+    # Test cases for the power function
+    test_cases = [
+        (2, 3, 8),           # Test raising a positive integer to a positive integer
+        (5, 0, 1),           # Test raising a positive integer to zero
+        (2.5, 2, 6.25),      # Test raising a positive float to a positive integer
+        (-2, 3, -8),         # Test raising a negative integer to an odd positive integer
+        (-2, 2, 4),          # Test raising a negative integer to an even positive integer
+        (3, -1, 1/3),        # Test raising a positive integer to a negative integer
+        (0, 5, 0),           # Test raising zero to a positive integer
+        (0, 0, 1),           # Test raising zero to zero (by convention)
+    ]
+
+    for base, exponent, expected in test_cases:
+        result = power(base, exponent)
+        assert result == expected, f"Expected power({base}, {exponent}) to be {expected}, but got {result}"
